@@ -72,6 +72,9 @@ a {
   width: 20em;
   height: 20em;
 }
+.ocultar {
+  display: none;
+}
 
 main {
   display: flex;

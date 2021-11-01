@@ -8,6 +8,7 @@ async function main() {
     waitToPressLogOff()
     await loadTasks()
     drawTasks()
+    document.querySelector(".loading").classList.add("ocultar")
     document.querySelector(".add-group").addEventListener("click", function(e){
         modifyDocumentToAdd(true)
     })

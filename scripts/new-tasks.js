@@ -5,12 +5,11 @@ window.addEventListener("load", main)
 
 async function main() {
     signIn()
-    signOff()
+    waitToPressLogOff()
     await loadTasks()
-    console.log(GROUPS)
     drawTasks()
     document.querySelector(".add-group").addEventListener("click", function(e){
-        moveRight(true)
+        modifyDocumentToAdd(true)
     })
     document.querySelector("ul .plus").addEventListener("click", function(e){
         addNewTask()
@@ -18,31 +17,9 @@ async function main() {
 
 }
 
-function addNewTask(data = null, completed = false) {
-    data || ( data = document.querySelector("input").value )
-    console.log(data)
-    if ( data == "" ) return
-    const dataGroup = document.querySelector("h1").innerText
-    const task = {description: JSON.stringify({group: dataGroup, description:data}), completed: completed};
-    fetch(url + '/tasks', {
-        method: "POST", 
-        headers: {
-            'Authorization': localStorage.getItem("token"),
-            'Content-Type': 'application/json',
-        }, 
-        body: JSON.stringify(task)})
-    .then(response => response.json())
-    .then(data => {
-        GROUPS = {}
-        return loadTasks()
-        
-    })
-    .then(data => {
-        drawTasks()
-    })
-}
 
-function moveRight(isAdding = false) {
+
+function modifyDocumentToAdd(isAdding = false) {
     if ( isAdding ) {
         const main = document.querySelector("h1")
         if ( main.innerHTML == "Add Group Name" ) return
@@ -65,7 +42,9 @@ function loadTasks() {
     return fetch(url + '/tasks', {method: "GET", headers: {'Authorization': localStorage.getItem("token")}})
     .then(response => response.json())
     .then(data => {
+        GROUPS = {}
         for (task of data) {
+            console.log(task)
             const taskData = JSON.parse(task.description);
             taskData.id = task.id
             taskData.completed = task.completed
@@ -73,8 +52,11 @@ function loadTasks() {
             if ( !GROUPS[group] ) {
                 GROUPS[group] = []
             }
-            GROUPS[group].push(taskData)
-        }
+            if ( !GROUPS[group].includes(taskData) ) {
+                GROUPS[group].push(taskData)
+            }
+       }
+       console.log(GROUPS)
     })
 }
 
@@ -95,7 +77,7 @@ function drawTasks(key = null) {
     right.innerHTML = "<h2>Archives</h2>"
     left.innerHTML = LEFT_ADD_GROUP
     left.querySelector(".add-group").addEventListener("click", function(e){
-        moveRight(true)
+        modifyDocumentToAdd(true)
     })
     for ( grupo in GROUPS ) {
         if (grupo == group) {
@@ -119,7 +101,7 @@ function drawTasks(key = null) {
     removeEdition()
 }
 
-function signOff() {
+function waitToPressLogOff() {
     document.querySelector("#closeApp").addEventListener("click", () => {
         localStorage.removeItem("token")
         location.href = "./index.html"

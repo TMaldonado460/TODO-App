@@ -8,19 +8,23 @@
   <title>ToDo</title>
 
   <!-- ---------------- estilos compartidos de login y signup ---------------- -->
+  <link rel="stylesheet" href="styles/common.css">
   <link rel="stylesheet" href="styles/ingreso.css">
 
   <!-- ---------------------- logica aplicada en login ----------------------- -->
-  <script src="./scripts/login.js"></script>
-
+  <script defer src="./scripts/login.js"></script>
+  <script defer src="scripts/signup.js"></script>
 </head>
 
 <body>
-  <div class="left">
+  <div class="left" style="top: 0;">
+    <div>
     <img src="./assets/persona-login.png" alt="">
   </div>
+  </div>
 
-  <div class="right">
+  <div class="right" style="top: -100vh;">
+    <div>
     <form>
       <div class="form-header">
         <p>To-Do App</p>
@@ -44,7 +48,7 @@
     <div class="ingresarA">
       <a href="signup.html">¿No tiene una cuenta? Regístrese aquí</a>
     </div>
-    
+  </div>
 
   </div>
 

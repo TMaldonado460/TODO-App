@@ -6,6 +6,7 @@ window.addEventListener('load', function(){
     /* -------------------------------------------------------------------------- */
     /* -------------------------------------------------------------------------- */
     /*                              logica del login                              */
+    loadDouble();
 
     const formulario =  this.document.forms[0];
     const inputEmail =  this.document.querySelector('#inputEmail');
@@ -70,3 +71,49 @@ function isUserSignIn() {
     })
     .catch(error => console.error('Error:', error));
 }
+
+function loadDouble() {
+    fetch("./signup.html")
+    .then(response => {
+        return response.text();
+    })
+    .then(data => {
+        html = document.createElement("html");
+        html.innerHTML = data;
+    left = html.querySelector(".left img");
+    right = html.querySelector(".right div");
+    div = document.createElement("div");
+    div.appendChild(left);
+    document.querySelector(".right").insertBefore(div, document.querySelector(".right").firstChild);
+    document.querySelector(".left").appendChild(right);
+})
+.then(() => {
+    document.querySelectorAll("a").forEach(function(e){
+        console.log(e);
+        e.addEventListener("click", swich);
+    });
+})
+.then(loadSignIn)
+}
+
+function swich(e) {
+    e.preventDefault();
+    const left = document.querySelector(".left")
+    const right = document.querySelector(".right")
+    const lTop = parseInt(left.style.top);
+    const rTop = parseInt(right.style.top);
+    console.log(lTop, rTop);
+    if (lTop) {
+        left.style.top = "0px";
+    } else {
+        left.style.top = "-100vh";
+    }
+    if (rTop) {
+        right.style.top = "0px";
+    }
+    else {
+        right.style.top = "-100vh";
+    }
+    return false;
+}
+

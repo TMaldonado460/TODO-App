@@ -1,5 +1,4 @@
-console.log('signup.js');
-window.onload = () => {
+function loadSignIn(){
     console.log('signup.js loaded');
     form = document.forms[0];
     inputs = form.querySelectorAll('input');

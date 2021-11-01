@@ -153,14 +153,16 @@ input:focus {
   background-color: white;
 }
 .left > :last-child, .right > :last-child {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   background-color: var(--app-grey);
+  z-index: 100;
   box-shadow: 
-    3px 0px 3px 0px rgba(0, 0, 0, 0.3),
-    -3px 0px 3px 0px rgba(0, 0, 0, 0.3);
+    3px 0px 7px 0px rgba(0, 0, 0, 0.6),
+    -3px 0px 7px 0px rgba(0, 0, 0, 0.6);
 }
 div img {
   width: 60%;

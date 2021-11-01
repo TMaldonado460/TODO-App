@@ -36,7 +36,10 @@ function createLi(description, completed=false, id=null) {
     return li
 }
 function remove(id) {
-    document.querySelector(`#t${id}`).remove()
+    const task = document.querySelector(`#t${id}`)
+    task.animate([{}, {transform: "translateX(50vw)", opacity: "0.4"}], {duration: 200, easing: "ease-out"}).onfinish = () => {
+        task.remove()
+    }
     fetch(url + '/tasks/' + id, {
         method: 'DELETE',
         path: id,
@@ -52,6 +55,7 @@ function remove(id) {
         else {
             location.reload()
         }
+        loadTasks()
     })
 }
 
@@ -72,6 +76,9 @@ function complete(id) {
             description: JSON.stringify({group: dataGroup, description:data}), 
             completed: completed
         })
+    })
+    .then( () => {
+        loadTasks()
     })
 }
 

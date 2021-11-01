@@ -50,6 +50,7 @@ input:focus {
   outline: none;
   border: 1px solid var(--app-grey);
   box-shadow: 0 1px 0 4px rgba(0, 0, 0, 1);
+  background-color: rgb(221, 250, 255);
 }
 
 label {
@@ -157,6 +158,9 @@ input:focus {
   justify-content: center;
   flex-direction: column;
   background-color: var(--app-grey);
+  box-shadow: 
+    3px 0px 3px 0px rgba(0, 0, 0, 0.3),
+    -3px 0px 3px 0px rgba(0, 0, 0, 0.3);
 }
 div img {
   width: 60%;

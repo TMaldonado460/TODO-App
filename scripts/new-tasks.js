@@ -5,16 +5,12 @@ window.addEventListener("load", main)
 
 async function main() {
     signIn()
-    waitToPressLogOff()
+    configureButtonLogOff()
     await loadTasks()
     drawTasks()
     document.querySelector(".loading").classList.add("ocultar")
-    document.querySelector(".add-group").addEventListener("click", function(e){
-        modifyDocumentToAdd(true)
-    })
-    document.querySelector("ul .plus").addEventListener("click", function(e){
-        addNewTask()
-    })
+    document.querySelector(".add-group").addEventListener("click", function(e){ modifyDocumentToAdd(true) })
+    document.querySelector("ul .plus").addEventListener("click", function(e){ addNewTask() })
 
 }
 
@@ -45,7 +41,6 @@ function loadTasks() {
     .then(data => {
         GROUPS = {}
         for (task of data) {
-            console.log(task)
             const taskData = JSON.parse(task.description);
             taskData.id = task.id
             taskData.completed = task.completed
@@ -57,7 +52,6 @@ function loadTasks() {
                 GROUPS[group].push(taskData)
             }
        }
-       console.log(GROUPS)
     })
 }
 
@@ -88,7 +82,6 @@ function drawTasks(key = null) {
         const h2 = document.createElement("h2")
         h2.innerText = grupo
         h2.onclick = async function() {
-            await loadTasks()
             drawTasks(h2.innerHTML)
         }
 
@@ -102,7 +95,7 @@ function drawTasks(key = null) {
     removeEdition()
 }
 
-function waitToPressLogOff() {
+function configureButtonLogOff() {
     document.querySelector("#closeApp").addEventListener("click", () => {
         localStorage.removeItem("token")
         location.href = "./index.html"

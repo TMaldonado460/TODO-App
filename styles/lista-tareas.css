@@ -1,4 +1,5 @@
 @import url('./common.css');
+
 header {
   display: flex;
   background: linear-gradient(90deg, var(--primary), var(--secondary));
@@ -103,8 +104,13 @@ ul {
   gap: 2em;
   width: 100%;
 }
-
+[contenteditable="true"] {
+  background-color: rgb(180, 180, 255);
+  width: max-content;
+  margin: 0 auto 60px;
+}
 li {
+  transition: all .3s ease-in-out;
   position: relative;
   font-size: 1.4em;
   font-variant: small-caps;

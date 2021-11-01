@@ -104,7 +104,8 @@ function drawTasks(key = null) {
         }
         const h2 = document.createElement("h2")
         h2.innerText = grupo
-        h2.onclick = function() {
+        h2.onclick = async function() {
+            await loadTasks()
             drawTasks(h2.innerHTML)
         }
 
